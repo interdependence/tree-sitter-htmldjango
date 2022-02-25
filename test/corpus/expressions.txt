@@ -1,0 +1,43 @@
+==================
+variable
+==================
+
+<html>
+  {{ variable }}
+  {{ variable|filter }}
+  {{ variable|filter:argument }}
+  {{ variable|filter:"quoted argument" }}
+  {{ variable|filter|filter:argument|filter:"quoted argument" }}
+</html>
+
+---
+
+(template
+  (content)
+  (variable
+    (variable_name))
+  (variable
+    (variable_name)
+    (filter
+      (filter_name)))
+  (variable
+    (variable_name)
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (variable
+    (variable_name)
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (variable
+    (variable_name)
+    (filter
+      (filter_name))
+    (filter
+      (filter_name)
+      (filter_argument))
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (content))

@@ -1,0 +1,33 @@
+==================
+comment
+==================
+
+<html>
+  {# comment #}
+  content
+  {% comment optional_label %}
+    content
+  {% endcomment %}
+  content
+  {# {{ variable }} {% statement %} {# comment #} content #}
+  content
+  {% comment optional_label %}
+  {% comment optional_label %}
+  {% comment optional_label %}
+  {% endcomment %}
+  {% endcomment %}
+  {% endcomment %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_comment)
+  (content)
+  (paired_comment)
+  (content)
+  (unpaired_comment)
+  (content)
+  (paired_comment)
+  (content))

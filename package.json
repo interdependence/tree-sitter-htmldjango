@@ -1,0 +1,28 @@
+{
+  "name": "tree-sitter-htmldjango",
+  "version": "0.1.0",
+  "description": "A tree-sitter grammar for the Django template language",
+  "main": "bindings/node",
+  "scripts": {
+    "test": "tree-sitter test"
+  },
+  "keywords": [
+    "django",
+    "html",
+    "tree-sitter",
+    "parser",
+    "grammar"
+  ],
+  "author": "William Vandervalk",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.15.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/interdependence/tree-sitter-htmldjango.git"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.4"
+  }
+}

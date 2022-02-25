@@ -1,0 +1,611 @@
+==================
+csrf_token
+==================
+
+<html>
+  {% csrf_token %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name))
+  (content))
+
+==================
+cycle
+==================
+
+<html>
+  {% cycle 'row1' rowvalue2 'row3' as row silent %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (string)
+    (variable
+      (variable_name))
+    (string)
+    (keyword)
+    (variable
+      (variable_name))
+    (keyword))
+  (content))
+
+==================
+debug
+==================
+
+<html>
+  {% debug %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name))
+  (content))
+
+==================
+extends
+==================
+
+<html>
+  {% extends "template.html" %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (string))
+  (content))
+
+==================
+firstof
+==================
+
+<html>
+  {% firstof var1 var2 var3 "fallback value" %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (variable
+      (variable_name))
+    (variable
+      (variable_name))
+    (string))
+  (content))
+
+==================
+include
+==================
+
+<html>
+  {% include "template.html" with var="value" only %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (string)
+    (keyword)
+    (variable
+      (variable_name))
+    (string)
+    (keyword))
+  (content))
+
+==================
+load
+==================
+
+<html>
+  {% load foo bar from somelibrary.otherlibrary %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (variable
+      (variable_name))
+    (keyword)
+    (variable
+      (variable_name)))
+  (content))
+
+==================
+lorem
+==================
+
+<html>
+  {% lorem 2 w random %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (number)
+    (variable
+      (variable_name))
+    (keyword))
+  (content))
+
+==================
+now
+==================
+
+<html>
+  {% now "jS F Y H:i" %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (string))
+  (content))
+
+==================
+regroup
+==================
+
+<html>
+  {% regroup list by attribute as list_attribute %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (keyword)
+    (variable
+      (variable_name))
+    (keyword)
+    (variable
+      (variable_name)))
+  (content))
+
+==================
+resetcycle
+==================
+
+<html>
+  {% resetcycle name %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (variable
+      (variable_name)))
+  (content))
+
+==================
+templatetag
+==================
+
+<html>
+  {% templatetag openblock %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (variable
+      (variable_name)))
+  (content))
+
+==================
+url
+==================
+
+<html>
+  {% url 'some-url-name' arg arg2 as the_url %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (string)
+    (variable
+      (variable_name))
+    (variable
+      (variable_name))
+    (keyword)
+    (variable
+      (variable_name)))
+  (content))
+
+==================
+widthratio
+==================
+
+<html>
+  {% widthratio this_value max_value max_width %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (variable
+      (variable_name))
+    (variable
+      (variable_name)))
+  (content))
+
+==================
+get_static_prefix
+==================
+
+<html>
+  {% get_static_prefix %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name))
+  (content))
+
+==================
+get_media_prefix
+==================
+
+<html>
+  {% get_media_prefix %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name))
+  (content))
+
+==================
+if
+==================
+
+<html>
+  {% if variable %}
+    content
+  {% elif variable2 %}
+    content
+  {% elif variable3 %}
+    content
+  {% else %}
+    content
+  {% endif %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (content)
+    (branch_statement
+      (tag_name)
+      (variable
+        (variable_name)))
+    (content)
+    (branch_statement
+      (tag_name)
+      (variable
+        (variable_name)))
+    (content)
+    (branch_statement
+      (tag_name))
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+for
+==================
+
+<html>
+  {% for variable in list %}
+    {{ variable }}
+  {% empty %}
+    content
+  {% endfor %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (keyword_operator)
+    (variable
+      (variable_name))
+    (variable
+      (variable_name))
+    (branch_statement
+      (tag_name))
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+block
+==================
+
+<html>
+  {% block name %}
+    content
+  {% endblock %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+autoescape
+==================
+
+<html>
+  {% autoescape off %}
+    content
+  {% endautoescape %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (keyword)
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+filter
+==================
+
+<html>
+  {% filter filter1|filter2 %}
+    content
+  {% endfilter %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (filter
+      (filter_name))
+    (filter
+      (filter_name))
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+ifchanged
+==================
+
+<html>
+  {% for variable in list %}
+    {% ifchanged variable %}
+      content
+    {% endifchanged %}
+  {% endfor %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (keyword_operator)
+    (variable
+      (variable_name))
+    (paired_statement
+      (tag_name)
+      (variable
+        (variable_name))
+      (content)
+      (tag_name)
+      (end_paired_statement))
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+blocktranslate
+==================
+
+<html>
+  {% blocktranslate %}
+    content
+  {% endblocktranslate %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+spaceless
+==================
+
+<html>
+  {% spaceless %}
+    content
+  {% endspaceless %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+verbatim
+==================
+
+<html>
+  {% verbatim block %}
+    content
+  {% endverbatim block %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (content)
+    (tag_name)
+    (variable
+      (variable_name))
+    (end_paired_statement))
+  (content))
+
+==================
+with
+==================
+
+<html>
+  {% with variable1=1 variable2=2 %}
+    content
+  {% endwith %}
+</html>
+
+---
+
+(template
+  (content)
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (number)
+    (variable
+      (variable_name))
+    (number)
+    (content)
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
+==================
+custom
+==================
+
+<html>
+  {% unpaired %}
+  {% paired %}
+    content
+  {% endpaired %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name))
+  (unpaired_statement
+    (tag_name))
+  (content)
+  (detatched_end_statement
+      (tag_name))
+  (content))
