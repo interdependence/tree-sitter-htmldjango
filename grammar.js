@@ -43,7 +43,7 @@ module.exports = grammar({
    
     filter: $ => seq($.filter_name, optional(seq(":", choice($.filter_argument, $._quoted_filter_argument)))),
     filter_name: $ => $._word,
-    filter_argument: $ => $._word,
+    filter_argument: $ => seq($._word, repeat(seq(".", $._word))),
     _quoted_filter_argument: $ => choice(
       seq("'", alias(repeat(/[^']/), $.filter_argument), "'"),
       seq('"', alias(repeat(/[^"]/), $.filter_argument), '"')

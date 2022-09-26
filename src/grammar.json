@@ -391,8 +391,29 @@
       "name": "_word"
     },
     "filter_argument": {
-      "type": "SYMBOL",
-      "name": "_word"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_word"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "."
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_word"
+              }
+            ]
+          }
+        }
+      ]
     },
     "_quoted_filter_argument": {
       "type": "CHOICE",
