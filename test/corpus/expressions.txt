@@ -4,6 +4,7 @@ variable
 
 <html>
   {{ variable }}
+  {{ variable.item1.item2 }}
   {{ variable|filter }}
   {{ variable|filter:argument }}
   {{ variable|filter:argument.item1.item2 }}
@@ -16,6 +17,8 @@ variable
 
 (template
   (content)
+  (variable
+    (variable_name))
   (variable
     (variable_name))
   (variable

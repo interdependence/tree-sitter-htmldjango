@@ -38,8 +38,8 @@ module.exports = grammar({
     _expression: $ => seq("{{", optional($._ws), $.variable, optional($._ws), "}}"),
 
     variable: $ => seq($.variable_name, repeat(seq("|", $.filter))),
-    // Django variables cannot start with an "_", can contain one or two words separated by a "."
-    variable_name: $ => seq(repeat1(/[A-Za-z]/), optional($._word), optional(seq(".", $._word))),
+    // Django variables cannot start with an "_", can contain one or more words separated by a "."
+    variable_name: $ => seq(repeat1(/[A-Za-z]/), optional($._word), repeat(seq(".", $._word))),
    
     filter: $ => seq($.filter_name, optional(seq(":", choice($.filter_argument, $._quoted_filter_argument)))),
     filter_name: $ => $._word,
