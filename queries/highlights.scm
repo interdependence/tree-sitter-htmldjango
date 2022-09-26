@@ -11,12 +11,14 @@
   (end_paired_statement)
 ] @tag
 
-"end" @keyword.return
+[
+ "end"
+ (tag_name) 
+] @function
 
 (variable_name) @variable
 (filter_name) @method
 (filter_argument) @parameter
-(tag_name) @function
 (keyword) @keyword
 (operator) @operator
 (keyword_operator) @keyword.operator
