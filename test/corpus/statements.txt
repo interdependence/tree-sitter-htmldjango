@@ -595,6 +595,12 @@ custom
   {% paired %}
     content
   {% endpaired %}
+  {% if_paired %}
+    content
+  {% endif_paired %}
+  {% for_paired %}
+    content
+  {% endfor_paired %}
 </html>
 
 ---
@@ -603,6 +609,16 @@ custom
   (content)
   (unpaired_statement
     (tag_name))
+  (unpaired_statement
+    (tag_name))
+  (content)
+  (detatched_end_statement
+      (tag_name))
+  (unpaired_statement
+    (tag_name))
+  (content)
+  (detatched_end_statement
+      (tag_name))
   (unpaired_statement
     (tag_name))
   (content)

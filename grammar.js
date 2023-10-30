@@ -73,13 +73,13 @@ module.exports = grammar({
       ];
 
       return choice(...tag_names.map((tag_name) => seq(
-        "{%", $._ws, alias(tag_name, $.tag_name), $._ws, repeat($._attribute), "%}",
+        "{%", $._ws, alias(tag_name + " ", $.tag_name), optional($._ws), repeat($._attribute), "%}",
         repeat($._node),
-        "{%", $._ws, "end", alias(tag_name, $.tag_name), $._ws, repeat($._attribute), alias("%}", $.end_paired_statement))));
+        "{%", $._ws, "end", alias(tag_name + " ", $.tag_name), optional($._ws), repeat($._attribute), alias("%}", $.end_paired_statement))));
     },
 
     if_statement: $ => seq(
-      "{%", $._ws, alias("if", $.tag_name), $._ws, repeat($._attribute), "%}",
+      "{%", $._ws, alias("if ", $.tag_name), optional($._ws), repeat($._attribute), "%}",
       repeat($._node),
       repeat(prec.left(seq(
         alias($.elif_statement, $.branch_statement),
@@ -89,26 +89,26 @@ module.exports = grammar({
         alias($.else_statement, $.branch_statement),
         repeat($._node),
       )),
-      "{%", $._ws, "end", alias("if", $.tag_name), $._ws, alias("%}", $.end_paired_statement)
+      "{%", $._ws, "end", alias("if ", $.tag_name), optional($._ws), alias("%}", $.end_paired_statement)
     ),
-    elif_statement: $ => seq("{%", $._ws, alias("elif", $.tag_name), $._ws, repeat($._attribute), "%}"),
-    else_statement: $ => seq("{%", $._ws, alias("else", $.tag_name), $._ws, "%}"),
+    elif_statement: $ => seq("{%", $._ws, alias("elif ", $.tag_name), optional($._ws), repeat($._attribute), "%}"),
+    else_statement: $ => seq("{%", $._ws, alias("else ", $.tag_name), optional($._ws), "%}"),
 
     for_statement: $ => seq(
-      "{%", $._ws, alias("for", $.tag_name), $._ws, repeat($._attribute), "%}",
+      "{%", $._ws, alias("for ", $.tag_name), optional($._ws), repeat($._attribute), "%}",
       repeat($._node),
       optional(seq(
         alias($.empty_statement, $.branch_statement),
         repeat($._node),
       )),
-      "{%", $._ws, "end", alias("for", $.tag_name), $._ws, alias("%}", $.end_paired_statement)
+      "{%", $._ws, "end", alias("for ", $.tag_name), optional($._ws), alias("%}", $.end_paired_statement)
     ),
-    empty_statement: $ => seq("{%", $._ws, alias("empty", $.tag_name), $._ws, repeat($._attribute), "%}"),
+    empty_statement: $ => seq("{%", $._ws, alias("empty ", $.tag_name), optional($._ws), repeat($._attribute), "%}"),
 
     filter_statement: $ => seq(
-      "{%", $._ws, alias("filter", $.tag_name), $._ws, $.filter, repeat(seq("|", $.filter)), $._ws, "%}",
+      "{%", $._ws, alias("filter ", $.tag_name), optional($._ws), $.filter, repeat(seq("|", $.filter)), $._ws, "%}",
       repeat($._node),
-      "{%", $._ws, "end", alias("filter", $.tag_name), $._ws, alias("%}", $.end_paired_statement)
+      "{%", $._ws, "end", alias("filter ", $.tag_name), optional($._ws), alias("%}", $.end_paired_statement)
     ),
     
     unpaired_statement: $ => seq("{%", $._ws, alias($._word, $.tag_name), $._ws, repeat($._attribute), "%}"),
