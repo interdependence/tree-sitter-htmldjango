@@ -1,8 +1,7 @@
 module.exports = grammar({
   name: "htmldjango",
 
-  // Handle whitespace explicitly
-  extras: $ => [],
+  word: $ => $._identifier,
 
   rules: {
     template: $ => repeat(
@@ -13,16 +12,39 @@ module.exports = grammar({
       $._expression,
       $._statement,
       $._comment,
-      $.content,
-      /\s+/
+      $.content
     ),
 
     // General rules
-    keyword: $ => choice("on", "off", "with", "as", "silent", "only", "from", "random", "by"),
+    keyword: $ => token(seq(
+      choice(
+        "on",
+        "off",
+        "with",
+        "as",
+        "silent",
+        "only",
+        "from",
+        "random",
+        "by"
+      ),
+      /\s/
+    )),
+    keyword_operator: $ => token(seq(
+      choice(
+        "and",
+        "or",
+        "not",
+        "in",
+        "not in",
+        "is",
+        "is not"
+      ),
+      /\s/
+    )),
     operator: $ => choice("==", "!=", "<", ">", "<=", ">="),
-    keyword_operator: $ => choice("and", "or", "not", "in", "not in", "is", "is not"),
-    number: $ => repeat1(/[0-9]/),
-    boolean: $ => choice("True", "False"),
+    number: $ => /[0-9]+/,
+    boolean: $ => token(seq(choice("True", "False"), /\s/)),
     string: $ => seq(
       choice(
         seq("'", repeat(/[^']/), "'"),
@@ -31,24 +53,23 @@ module.exports = grammar({
       repeat(seq("|", $.filter))
     ),
 
-    _word: $ => repeat1(/[A-Za-z0-9_]/),
-    _ws: $ => repeat1(" "),
+    _identifier: $ => /\w+/,
 
     // Expressions
-    _expression: $ => seq("{{", optional($._ws), $.variable, optional($._ws), "}}"),
+    _expression: $ => seq("{{", $.variable, "}}"),
 
     variable: $ => seq($.variable_name, repeat(seq("|", $.filter))),
     // Django variables cannot start with an "_", can contain one or more words separated by a "."
-    variable_name: $ => seq(repeat1(/[A-Za-z]/), optional($._word), repeat(seq(".", $._word))),
-   
+    variable_name: $ => /[a-zA-Z](\w+)?((\.?\w)+)?/,
+
     filter: $ => seq($.filter_name, optional(seq(":", choice($.filter_argument, $._quoted_filter_argument)))),
-    filter_name: $ => $._word,
-    filter_argument: $ => seq($._word, repeat(seq(".", $._word))),
+    filter_name: $ => $._identifier,
+    filter_argument: $ => seq($._identifier, repeat(seq(".", $._identifier))),
     _quoted_filter_argument: $ => choice(
       seq("'", alias(repeat(/[^']/), $.filter_argument), "'"),
       seq('"', alias(repeat(/[^"]/), $.filter_argument), '"')
     ),
-   
+
     // Statements
     // unpaired type {% tag %}
     // paired type   {% tag %}..{% endtag %}
@@ -57,8 +78,7 @@ module.exports = grammar({
       alias($.if_statement, $.paired_statement),
       alias($.for_statement, $.paired_statement),
       alias($.filter_statement, $.paired_statement),
-      $.unpaired_statement,
-      $.detatched_end_statement
+      $.unpaired_statement
     ),
 
     paired_statement: $ => {
@@ -73,13 +93,13 @@ module.exports = grammar({
       ];
 
       return choice(...tag_names.map((tag_name) => seq(
-        "{%", $._ws, alias(tag_name + " ", $.tag_name), optional($._ws), repeat($._attribute), "%}",
+        "{%", alias(tag_name, $.tag_name), repeat($._attribute), "%}",
         repeat($._node),
-        "{%", $._ws, "end", alias(tag_name + " ", $.tag_name), optional($._ws), repeat($._attribute), alias("%}", $.end_paired_statement))));
+        "{%", alias("end" + tag_name, $.tag_name), repeat($._attribute), alias("%}", $.end_paired_statement))));
     },
 
     if_statement: $ => seq(
-      "{%", $._ws, alias("if ", $.tag_name), optional($._ws), repeat($._attribute), "%}",
+      "{%", alias("if", $.tag_name), repeat($._attribute), "%}",
       repeat($._node),
       repeat(prec.left(seq(
         alias($.elif_statement, $.branch_statement),
@@ -89,30 +109,28 @@ module.exports = grammar({
         alias($.else_statement, $.branch_statement),
         repeat($._node),
       )),
-      "{%", $._ws, "end", alias("if ", $.tag_name), optional($._ws), alias("%}", $.end_paired_statement)
+      "{%", alias("endif", $.tag_name), alias("%}", $.end_paired_statement)
     ),
-    elif_statement: $ => seq("{%", $._ws, alias("elif ", $.tag_name), optional($._ws), repeat($._attribute), "%}"),
-    else_statement: $ => seq("{%", $._ws, alias("else ", $.tag_name), optional($._ws), "%}"),
+    elif_statement: $ => seq("{%", alias("elif", $.tag_name), repeat($._attribute), "%}"),
+    else_statement: $ => seq("{%", alias("else", $.tag_name), "%}"),
 
     for_statement: $ => seq(
-      "{%", $._ws, alias("for ", $.tag_name), optional($._ws), repeat($._attribute), "%}",
+      "{%", alias("for", $.tag_name), repeat($._attribute), "%}",
       repeat($._node),
       optional(seq(
         alias($.empty_statement, $.branch_statement),
         repeat($._node),
       )),
-      "{%", $._ws, "end", alias("for ", $.tag_name), optional($._ws), alias("%}", $.end_paired_statement)
+      "{%", alias("endfor", $.tag_name), alias("%}", $.end_paired_statement)
     ),
-    empty_statement: $ => seq("{%", $._ws, alias("empty ", $.tag_name), optional($._ws), repeat($._attribute), "%}"),
+    empty_statement: $ => seq("{%", alias("empty", $.tag_name), repeat($._attribute), "%}"),
 
     filter_statement: $ => seq(
-      "{%", $._ws, alias("filter ", $.tag_name), optional($._ws), $.filter, repeat(seq("|", $.filter)), $._ws, "%}",
+      "{%", alias("filter", $.tag_name), $.filter, repeat(seq("|", $.filter)), "%}",
       repeat($._node),
-      "{%", $._ws, "end", alias("filter ", $.tag_name), optional($._ws), alias("%}", $.end_paired_statement)
+      "{%", alias("endfilter", $.tag_name), alias("%}", $.end_paired_statement)
     ),
-    
-    unpaired_statement: $ => seq("{%", $._ws, alias($._word, $.tag_name), $._ws, repeat($._attribute), "%}"),
-    detatched_end_statement: $ => seq("{%", $._ws, "end", alias($._word, $.tag_name), $._ws, repeat($._attribute), "%}"),
+    unpaired_statement: $ => seq("{%", alias($._identifier, $.tag_name), repeat($._attribute), "%}"),
 
     _attribute: $ => seq(
       choice(
@@ -124,11 +142,7 @@ module.exports = grammar({
         $.string,
         $.variable
       ),
-      choice(
-        $._ws,
-        seq(optional($._ws), ",", optional($._ws)),
-        seq(optional($._ws), "=", optional($._ws))
-      )
+      optional(choice(",", "="))
     ),
 
     // Comments
@@ -140,10 +154,10 @@ module.exports = grammar({
     ),
     unpaired_comment: $ => seq("{#", repeat(/.|\s/), repeat(seq(alias($.unpaired_comment, ""), repeat(/.|\s/))), "#}"),
     paired_comment: $ => seq(
-      alias("{%", ""), $._ws, "comment", optional(seq($._ws, $._word)), $._ws, alias("%}", ""),
+      alias("{%", ""), "comment", optional($._identifier), alias("%}", ""),
       repeat(/.|\s/),
       repeat(seq(alias($.paired_comment, ""), repeat(/.|\s/))),
-      alias("{%", ""), $._ws, "endcomment", $._ws, alias("%}", "")
+      alias("{%", ""), "endcomment", alias("%}", "")
     ),
 
     // All other content

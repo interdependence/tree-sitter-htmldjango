@@ -5,55 +5,7 @@
     "fields": {}
   },
   {
-    "type": "boolean",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "branch_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "boolean",
-          "named": true
-        },
-        {
-          "type": "keyword",
-          "named": true
-        },
-        {
-          "type": "keyword_operator",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "operator",
-          "named": true
-        },
-        {
-          "type": "string",
-          "named": true
-        },
-        {
-          "type": "tag_name",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "detatched_end_statement",
     "named": true,
     "fields": {},
     "children": {
@@ -125,21 +77,6 @@
     "fields": {}
   },
   {
-    "type": "keyword",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "keyword_operator",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "number",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "operator",
     "named": true,
     "fields": {}
@@ -167,10 +104,6 @@
         },
         {
           "type": "content",
-          "named": true
-        },
-        {
-          "type": "detatched_end_statement",
           "named": true
         },
         {
@@ -244,11 +177,6 @@
     }
   },
   {
-    "type": "tag_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "template",
     "named": true,
     "fields": {},
@@ -258,10 +186,6 @@
       "types": [
         {
           "type": "content",
-          "named": true
-        },
-        {
-          "type": "detatched_end_statement",
           "named": true
         },
         {
@@ -355,16 +279,7 @@
     }
   },
   {
-    "type": "variable_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "",
-    "named": false
-  },
-  {
-    "type": " ",
     "named": false
   },
   {
@@ -424,24 +339,8 @@
     "named": false
   },
   {
-    "type": "False",
-    "named": false
-  },
-  {
-    "type": "True",
-    "named": false
-  },
-  {
-    "type": "and",
-    "named": false
-  },
-  {
-    "type": "as",
-    "named": false
-  },
-  {
-    "type": "by",
-    "named": false
+    "type": "boolean",
+    "named": true
   },
   {
     "type": "comment",
@@ -452,10 +351,6 @@
     "named": true
   },
   {
-    "type": "end",
-    "named": false
-  },
-  {
     "type": "end_paired_statement",
     "named": true
   },
@@ -464,56 +359,24 @@
     "named": false
   },
   {
-    "type": "from",
-    "named": false
+    "type": "keyword",
+    "named": true
   },
   {
-    "type": "in",
-    "named": false
+    "type": "keyword_operator",
+    "named": true
   },
   {
-    "type": "is",
-    "named": false
+    "type": "number",
+    "named": true
   },
   {
-    "type": "is not",
-    "named": false
+    "type": "tag_name",
+    "named": true
   },
   {
-    "type": "not",
-    "named": false
-  },
-  {
-    "type": "not in",
-    "named": false
-  },
-  {
-    "type": "off",
-    "named": false
-  },
-  {
-    "type": "on",
-    "named": false
-  },
-  {
-    "type": "only",
-    "named": false
-  },
-  {
-    "type": "or",
-    "named": false
-  },
-  {
-    "type": "random",
-    "named": false
-  },
-  {
-    "type": "silent",
-    "named": false
-  },
-  {
-    "type": "with",
-    "named": false
+    "type": "variable_name",
+    "named": true
   },
   {
     "type": "{#",

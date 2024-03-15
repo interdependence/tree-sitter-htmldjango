@@ -12,7 +12,6 @@
 ] @tag
 
 [
- "end"
  (tag_name) 
 ] @function
 

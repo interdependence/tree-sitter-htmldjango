@@ -587,6 +587,31 @@ with
   (content))
 
 ==================
+keywords
+==================
+
+<html>
+  {% get_word as word %}
+  {% get_word as randomword %}
+</html>
+
+---
+
+(template
+  (content)
+  (unpaired_statement
+    (tag_name)
+    (keyword)
+    (variable
+      (variable_name)))
+  (unpaired_statement
+    (tag_name)
+    (keyword)
+    (variable
+      (variable_name)))
+  (content))
+
+==================
 custom
 ==================
 
@@ -612,16 +637,16 @@ custom
   (unpaired_statement
     (tag_name))
   (content)
-  (detatched_end_statement
+  (unpaired_statement
       (tag_name))
   (unpaired_statement
     (tag_name))
   (content)
-  (detatched_end_statement
+  (unpaired_statement
       (tag_name))
   (unpaired_statement
     (tag_name))
   (content)
-  (detatched_end_statement
+  (unpaired_statement
       (tag_name))
   (content))
