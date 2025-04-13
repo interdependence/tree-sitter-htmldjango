@@ -179,6 +179,7 @@
   {
     "type": "template",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,

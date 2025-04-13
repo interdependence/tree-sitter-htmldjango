@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "htmldjango",
+      "camelcase": "htmlDjango",
+      "title": "Htmldjango",
+      "scope": "source.htmldjango",
+      "file-types": [
+        "html"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections.scm",
+      "injection-regex": "^htmldjango$",
+      "class-name": "TreeSitterHtmldjango"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "A tree-sitter grammar for the Django template language",
+    "authors": [
+      {
+        "name": "William Vandervalk",
+        "url": "https://williamvandervalk.com/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/interdependence/tree-sitter-htmldjango"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
