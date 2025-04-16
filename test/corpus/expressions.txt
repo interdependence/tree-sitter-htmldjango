@@ -56,3 +56,88 @@ variable
       (filter_name)
       (filter_argument)))
   (content))
+
+==================
+string
+==================
+
+<html>
+  {{ "string" }}
+  {{ 'string' }}
+  {{ "string"|filter }}
+  {{ 'string'|filter }}
+  {{ "string"|filter:argument }}
+  {{ 'string'|filter:argument }}
+  {{ "string"|filter:argument.item1.item2 }}
+  {{ 'string'|filter:argument.item1.item2 }}
+  {{ "string"|filter:"quoted argument" }}
+  {{ 'string'|filter:'quoted argument' }}
+  {{ "string"|filter:"quoted argument, with non-word characters!" }}
+  {{ 'string'|filter:'quoted argument, with non-word characters!' }}
+  {{ "string"|filter|filter:argument|filter:"quoted argument" }}
+  {{ 'string'|filter|filter:argument|filter:'quoted argument' }}
+</html>
+
+---
+
+(template
+  (content)
+  (string)
+  (string)
+  (string
+    (filter
+      (filter_name)))
+  (string
+    (filter
+      (filter_name)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name))
+    (filter
+      (filter_name)
+      (filter_argument))
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (string
+    (filter
+      (filter_name))
+    (filter
+      (filter_name)
+      (filter_argument))
+    (filter
+      (filter_name)
+      (filter_argument)))
+  (content))

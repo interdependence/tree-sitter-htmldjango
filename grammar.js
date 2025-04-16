@@ -56,7 +56,7 @@ module.exports = grammar({
     _identifier: $ => /\w+/,
 
     // Expressions
-    _expression: $ => seq("{{", $.variable, "}}"),
+    _expression: $ => seq("{{", choice($.variable, $.string), "}}"),
 
     variable: $ => seq($.variable_name, repeat(seq("|", $.filter))),
     // Django variables cannot start with an "_", can contain one or more words separated by a "."
