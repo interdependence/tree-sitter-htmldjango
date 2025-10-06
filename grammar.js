@@ -3,6 +3,10 @@ module.exports = grammar({
 
   word: $ => $._identifier,
 
+  externals: $ => [
+    $._paired_comment_content
+  ],
+
   rules: {
     template: $ => repeat(
       $._node
@@ -152,12 +156,11 @@ module.exports = grammar({
       $.unpaired_comment,
       $.paired_comment
     ),
-    unpaired_comment: $ => seq("{#", repeat(/.|\s/), repeat(seq(alias($.unpaired_comment, ""), repeat(/.|\s/))), "#}"),
+    unpaired_comment: $ => token(seq("{#", /([^#]|#[^}])*/, "#}")),
     paired_comment: $ => seq(
-      alias("{%", ""), "comment", optional($._identifier), alias("%}", ""),
-      repeat(/.|\s/),
-      repeat(seq(alias($.paired_comment, ""), repeat(/.|\s/))),
-      alias("{%", ""), "endcomment", alias("%}", "")
+      "{%", "comment", optional($._identifier), "%}",
+      $._paired_comment_content,
+      "{%", "endcomment", "%}"
     ),
 
     // All other content

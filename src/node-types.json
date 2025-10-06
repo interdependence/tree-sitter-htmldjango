@@ -1,10 +1,5 @@
 [
   {
-    "type": "",
-    "named": false,
-    "fields": {}
-  },
-  {
     "type": "branch_statement",
     "named": true,
     "fields": {},
@@ -217,11 +212,6 @@
     }
   },
   {
-    "type": "unpaired_comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "unpaired_statement",
     "named": true,
     "fields": {},
@@ -284,19 +274,11 @@
     }
   },
   {
-    "type": "",
-    "named": false
-  },
-  {
     "type": "!=",
     "named": false
   },
   {
     "type": "\"",
-    "named": false
-  },
-  {
-    "type": "#}",
     "named": false
   },
   {
@@ -380,12 +362,12 @@
     "named": true
   },
   {
-    "type": "variable_name",
+    "type": "unpaired_comment",
     "named": true
   },
   {
-    "type": "{#",
-    "named": false
+    "type": "variable_name",
+    "named": true
   },
   {
     "type": "{%",
