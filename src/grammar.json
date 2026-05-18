@@ -1037,29 +1037,25 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "PREC_LEFT",
-            "value": 0,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "ALIAS",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "elif_statement"
-                  },
-                  "named": true,
-                  "value": "branch_statement"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "elif_statement"
                 },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "SYMBOL",
-                    "name": "_node"
-                  }
+                "named": true,
+                "value": "branch_statement"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_node"
                 }
-              ]
-            }
+              }
+            ]
           }
         },
         {
@@ -1601,7 +1597,11 @@
       "value": "\\s"
     }
   ],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "if_statement"
+    ]
+  ],
   "precedences": [],
   "externals": [],
   "inline": [],

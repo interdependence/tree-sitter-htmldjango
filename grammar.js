@@ -3,6 +3,8 @@ module.exports = grammar({
 
   word: $ => $._identifier,
 
+  conflicts: $ => [[$.if_statement]],
+
   rules: {
     template: $ => repeat(
       $._node
@@ -102,7 +104,7 @@ module.exports = grammar({
     if_statement: $ => seq(
       "{%", alias("if", $.tag_name), repeat($._attribute), "%}",
       repeat($._node),
-      repeat(prec.left(seq(
+      repeat((seq(
         alias($.elif_statement, $.branch_statement),
         repeat($._node),
       ))),

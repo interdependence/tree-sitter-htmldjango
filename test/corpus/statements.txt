@@ -356,6 +356,31 @@ if
     (end_paired_statement))
   (content))
 
+============
+statement-in-elif
+============
+{% if cond %}
+{% elif cond2 %}
+    {% foo %}
+{% endif %}
+
+---
+
+(template
+  (paired_statement
+    (tag_name)
+    (variable
+      (variable_name))
+    (branch_statement
+      (tag_name)
+      (variable
+        (variable_name)))
+    (unpaired_statement
+      (tag_name))
+    (tag_name)
+    (end_paired_statement))
+  (content))
+
 ==================
 for
 ==================
